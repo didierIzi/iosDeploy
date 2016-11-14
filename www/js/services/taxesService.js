@@ -168,7 +168,7 @@
                         newTaxCategory.TPSValue = JSON.parse(taxCategorySetting.Value);
                         newTaxCategory.TaxCategoryId = parseInt(taxCategorySetting.Name.replace('tax.taxprovider.quebectps.taxcategoryid', ''));
                         // Searching tvq
-                        var tvqSetting = Enumerable.from(results.Settings).where("s => s.Name.indexOf('tax.taxprovider.quebectvq.taxcategoryid" + taxCategorySetting.TaxCategoryId + "') == 0").firstOrDefault();
+                        var tvqSetting = Enumerable.from(results.Settings).where("s => s.Name.indexOf('tax.taxprovider.quebectvq.taxcategoryid" + newTaxCategory.TaxCategoryId + "') == 0").firstOrDefault();
                         if (tvqSetting) newTaxCategory.TVQValue = JSON.parse(tvqSetting.Value);
                         else newTaxCategory.TVQValue = 0;
 
