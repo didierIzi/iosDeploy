@@ -30,6 +30,7 @@
         	//Pas réussi à déterminer la devise
         	if ($rootScope.IziPosConfiguration.Currency.CurrencyCode == "EUR") res = roundValue(input) + " €";
         	if ($rootScope.IziPosConfiguration.Currency.CurrencyCode == "USD") res = "$"+roundValue(input);
+            if ($rootScope.IziPosConfiguration.Currency.CurrencyCode == "CAD") res = "$"+roundValue(input);
         }
 
         return res;
