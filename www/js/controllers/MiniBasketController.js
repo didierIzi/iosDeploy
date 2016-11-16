@@ -1,9 +1,10 @@
-﻿app.controller('MiniBasketController', function ($scope, $rootScope, $state, $uibModal, $timeout, settingService, shoppingCartService, productService, shoppingCartModel, posUserService, settingService, orderShoppingCartService, $translate) {
+﻿app.controller('MiniBasketController', function ($scope, $rootScope, $state, $uibModal, $timeout,$filter, settingService, shoppingCartService, productService, shoppingCartModel, posUserService, settingService, orderShoppingCartService,taxesService, $translate) {
 	var deliveryTypeHandler = undefined;
 	var itemsHandler = undefined;
 	var accordionHandler = undefined;
 	var loyaltyHandler = undefined;
 	var orderServiceHandler = undefined;
+	$scope.filter = $filter;
 
 	$scope.DeliveryTypes = DeliveryTypes;
 
@@ -66,7 +67,8 @@
     }
 
     var updateCurrentShoppingCart = function () {
-    	$scope.totalDivider = 1;
+        $scope.totalDivider = 1;
+        $scope.filteredTaxDetails = undefined;
 
     	if (itemsHandler) itemsHandler();
 
@@ -428,6 +430,15 @@
 
     //#region FID
 
+    $scope.openClientModal = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: 'modals/modalCustomer.html',
+            controller: 'ModalCustomerController',
+            backdrop: 'static',
+            size: 'lg'
+        });
+    }
+
     $scope.chooseRelevantOffer = function () {
         shoppingCartModel.chooseRelevantOffer();
     }
@@ -486,6 +497,10 @@
             if (miniBasketInfosDiv) {
             	miniBasketInfosDiv.style.maxHeight = itemsHeight + "px";
             }
+        }
+
+        if ($scope.currentShoppingCart) {
+            $scope.filteredTaxDetails = taxesService.groupTaxDetail($scope.currentShoppingCart.TaxDetails);
         }
     }
     //#endregion

@@ -124,7 +124,18 @@
 		"Non": "No",
 		"Annuler": "Cancel",
 		"Continuer": "Continue",
-		"Réessayer": "Retry"
+		"Réessayer": "Retry",
+		"Merci de votre visite": "xxxxx",
+		"Nombre d'articles": "xxxxx",
+		"Qté": "xxxxx",
+		"Description": "xxxxx",
+		"Montant": "xxxxx",
+		"Ticket": "xxxxx",
+		"Remise ": "xxxxx",
+		"Mode Paiement:":"xxxxx",
+		"Cagnotte utilisée": "xxxxx",
+		"COUVERT(S) ": "xxxxxxx",
+		"TABLE ": "xxxxxxxxx"
 
 	});
 

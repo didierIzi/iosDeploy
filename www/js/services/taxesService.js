@@ -18,6 +18,27 @@
         });
 
 
+        this.groupTaxDetail = function (input) {
+            var taxDetails = [];
+
+            if (input) {
+                Enumerable.from(input).forEach(function (itemTaxDetail) {
+                    var existingTaxDetail = Enumerable.from(taxDetails).firstOrDefault(function (taxD) {
+                        return taxD.TaxCode == itemTaxDetail.TaxCode && taxD.TaxRate == itemTaxDetail.TaxRate;
+                    });
+
+                    // On ajoute le montant de la taxe 
+                    if (existingTaxDetail) {
+                        existingTaxDetail.TaxAmount += itemTaxDetail.TaxAmount;
+                    } else {
+                        taxDetails.push(clone(itemTaxDetail));
+                    }
+
+                });
+            }
+
+            return taxDetails;
+        }
 
 
         //#region Données TAXE -> PouchDB
@@ -315,8 +336,8 @@
                         }
                         
                         // on récupère le montant de chaque taxe et on les ajoute au détail de taxe
-                        var newTaxDetailTPS = getTaxDetailLine(cartItem.Product.TaxCategory.TaxCategoryId, "TPS", cartItem.Product.TaxCategory.TPSValue, tpsAmount);
-                        var newTaxDetailTVQ = getTaxDetailLine(cartItem.Product.TaxCategory.TaxCategoryId, "TVQ", cartItem.Product.TaxCategory.TVQValue, tvqAmount);
+                        var newTaxDetailTPS = getTaxDetailLine(cartItem.Product.TaxCategory.TaxCategoryId, "TPS", cartItem.Product.TaxCategory.TPSValue, tpsAmount*cartItem.Quantity);
+                        var newTaxDetailTVQ = getTaxDetailLine(cartItem.Product.TaxCategory.TaxCategoryId, "TVQ", cartItem.Product.TaxCategory.TVQValue, tvqAmount*cartItem.Quantity);
                         taxDetails.push(newTaxDetailTPS);
                         taxDetails.push(newTaxDetailTVQ);
                         
@@ -348,9 +369,9 @@
                     // on calcul le prix 
                     calculateCartItemTotal(i, shoppingCart.DeliveryType);
                     
-                    // on ajoute le total TTC et HT de l'article au montant total 
-                    totalIT += i.PriceIT;
-                    totalET += i.PriceET;
+                    // on ajoute le total TTC et HT de la ligne au montant total 
+                    totalIT += roundValue(i.PriceIT);
+                    totalET += roundValue(i.PriceET);
     
                     // On récupère les taxes de l'article
                     Enumerable.from(i.TaxDetails).forEach(function (itemTaxDetail) {

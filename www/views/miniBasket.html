@@ -1,7 +1,11 @@
 ﻿<md-content ng-controller="MiniBasketController" ng-init="init()" id="miniBasket" class="miniBasket" layout="column" flex>
 
     <div layout="column" flex>
-        <ng-barcodetextfield></ng-barcodetextfield>
+        <div layout="row">
+            <ng-barcodetextfield flex></ng-barcodetextfield>
+            <md-button aria-label="client" class="btnAction"><span class="glyphicon glyphicon-user"></span></md-button>
+            <!--<md-button aria-label="client" class="btnAction" ng-click="openClientModal()"><span class="glyphicon glyphicon-user"></span></md-button>-->
+        </div>
 
         <div id="loyaltyRow" layout="column" class="loyaltyRow">
             <div ng-if="currentShoppingCart.customerLoyalty">
@@ -82,7 +86,7 @@
                                 <span ng-if="currentShoppingCart == undefined">{{0 | CurrencyFormat}}</span>
                             </div>
                         </div>
-                        <div class="totalVAT" ng-repeat="tax in currentShoppingCart.TaxDetails" layout="row">
+                        <div class="totalVAT" ng-repeat="tax in filteredTaxDetails" layout="row">
                             <div flex>
                                 <span>{{tax.TaxCode+" "+tax.TaxRate}}%</span>
                             </div>

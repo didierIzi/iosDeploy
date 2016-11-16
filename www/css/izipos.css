@@ -469,6 +469,15 @@ text-field {
     width:100%;
 }
 
+.miniBasket .btnAction{
+    max-width: 40px;
+    min-width: 40px;
+    padding: 0 !important;
+    margin: 0 2px 0 2px !important;
+    background: lightgray !important;
+    color: black;
+}
+
 .miniBasket .productLine{
     padding-left:0px !important;
     padding-right:0px !important;
@@ -1314,6 +1323,12 @@ td.zvalue {
 .tableplan .btnItemTable.btnTableCircle{
 	border-radius:50%;
 }
+
+/*---------------MODAL Customer---------------------------------------------------------*/
+.customerModal{
+    margin-top: 5px;
+}
+/*---------------End customer modal-----------------------------------------------------*/
 /*-----------------Admin----------------------------------------------*/
 md-input-container label:not(._md-container-ignore) {
     position: absolute;

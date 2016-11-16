@@ -1,5 +1,6 @@
 ﻿app
 
+
 .filter('PictureNameToImage', function () {
     return function (input, alt) {
         var res = undefined;
@@ -29,8 +30,8 @@
         if (input.toString() == res) {
         	//Pas réussi à déterminer la devise
         	if ($rootScope.IziPosConfiguration.Currency.CurrencyCode == "EUR") res = roundValue(input) + " €";
-        	if ($rootScope.IziPosConfiguration.Currency.CurrencyCode == "USD") res = "$"+roundValue(input);
-            if ($rootScope.IziPosConfiguration.Currency.CurrencyCode == "CAD") res = "$"+roundValue(input);
+        	if ($rootScope.IziPosConfiguration.Currency.CurrencyCode == "USD") res = "$" + roundValue(input);
+        	if ($rootScope.IziPosConfiguration.Currency.CurrencyCode == "CAD") res = "$" + roundValue(input);
         }
 
         return res;
